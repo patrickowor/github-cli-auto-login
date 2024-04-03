@@ -36,7 +36,7 @@ fn main() {
         println!("Error : no argument passed");
         return ();
     }
-    println!("{}",command("gh auth logout"));
+    let _ =command("gh auth logout");
     match args[1].as_str() {
         "token" => {
             if args.len() < 3 {
@@ -44,7 +44,9 @@ fn main() {
                 return ();
             }
             let result = command(format(args[2].clone()).as_str());
+            
             if result == String::from("") {
+                let _ =command("gh auth setup-git");
                 let r =command("gh auth status");
                 println!("{r}");
             }
@@ -61,6 +63,7 @@ fn main() {
                     // println!("{}, {}",args[1], parts[0]);
                     let result = command(format(parts[1].to_string()).as_str());
                     if result == String::from("") {
+                        let _ =command("gh auth setup-git");
                         let r =command("gh auth status");
                         println!("{r}");
                     }
